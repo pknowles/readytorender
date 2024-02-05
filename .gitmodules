@@ -1,0 +1,15 @@
+[submodule "external/decodeless/header"]
+	path = external/decodeless/header
+	url = git@github.com:decodeless/header.git
+[submodule "external/decodeless/writer"]
+	path = external/decodeless/writer
+	url = git@github.com:decodeless/writer.git
+[submodule "external/decodeless/allocator"]
+	path = external/decodeless/allocator
+	url = git@github.com:decodeless/allocator.git
+[submodule "external/decodeless/offset_ptr"]
+	path = external/decodeless/offset_ptr
+	url = git@github.com:decodeless/offset_ptr.git
+[submodule "external/decodeless/mappedfile"]
+	path = external/decodeless/mappedfile
+	url = git@github.com:decodeless/mappedfile.git
