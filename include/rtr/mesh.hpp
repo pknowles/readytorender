@@ -57,6 +57,8 @@ inline MeshHeader::MeshHeader()
           .gitHash = readytorender_GIT_HASH,
       } {}
 
+static_assert(decodeless::VersionedSubHeader<MeshHeader>);
+
 } // namespace common
 
 } // namespace rtr

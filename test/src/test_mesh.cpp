@@ -39,10 +39,10 @@ TEST(Mesh, BasicIntegration) {
     }
 
     // "load" the file - zero computation here
-    rtr::RootHeader* rtrFile = reinterpret_cast<rtr::RootHeader*>(fileData);
+    const rtr::RootHeader* rtrFile = reinterpret_cast<const rtr::RootHeader*>(fileData);
 
     // Find the mesh header (binary searches and verifies the version number)
-    rtr::common::MeshHeader* meshHeader = rtrFile->findSupported<rtr::common::MeshHeader>();
+    const rtr::common::MeshHeader* meshHeader = rtrFile->findSupported<const rtr::common::MeshHeader>();
     ASSERT_NE(meshHeader, nullptr);
 
     // Access only the structured data needed, immediately without parsing,

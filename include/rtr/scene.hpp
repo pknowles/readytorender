@@ -123,4 +123,6 @@ inline SceneHeader::SceneHeader()
           .gitHash = readytorender_GIT_HASH,
       } {}
 
+static_assert(decodeless::VersionedSubHeader<SceneHeader>);
+
 } // namespace rtr

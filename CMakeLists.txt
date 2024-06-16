@@ -6,14 +6,24 @@ project(readytorender)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_subdirectory(external)
-
 if(BUILD_TESTING)
   option(BUILD_READYTORENDER_TESTING "Enable readytorender testing" ON)
   if(BUILD_READYTORENDER_TESTING)
     enable_testing()
     add_subdirectory(test)
   endif()
+endif()
+
+# Add dependencies if not already included by a parent project.
+# Add offset_ptr first or header may use fetch_content to get it.
+# TODO: if parent projects have these, they probably shouldn't be submodules
+if(NOT TARGET decodeless::offset_ptr)
+  option(DECODELESS_OFFSET_PTR_SEARCH_PATH "${CMAKE_CURRENT_LIST_DIR}/decodeless_offset_ptr")
+  add_subdirectory(decodeless_offset_ptr)
+endif()
+if(NOT TARGET decodeless::header)
+  option(DECODELESS_HEADER_SEARCH_PATH "${CMAKE_CURRENT_LIST_DIR}/decodeless_header")
+  add_subdirectory(decodeless_header)
 endif()
 
 add_custom_target(readytorender_gitversion

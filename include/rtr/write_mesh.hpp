@@ -29,7 +29,7 @@ template <class Allocator, std::ranges::input_range Meshes, std::ranges::input_r
         T*     elementsEnd = nullptr;                                                              \
         for (auto& mesh : meshes) {                                                                \
             auto& span = result->meshes[i++].ATTR_NAME;                                            \
-            span = decodeless::create::array<T>(allocator, mesh.ATTR_NAME);                        \
+            span = decodeless::create::array<std::remove_const_t<T>>(allocator, mesh.ATTR_NAME);   \
             if (!lastByte)                                                                         \
                 firstByte = reinterpret_cast<const std::byte*>(span.data());                       \
             if (!elementsEnd)                                                                      \
@@ -48,7 +48,7 @@ template <class Allocator, std::ranges::input_range Meshes, std::ranges::input_r
         allocator, std::ranges::size(meshNames));
     auto meshNameIt = result->meshNames.begin();
     for (auto& meshName : meshNames)
-        *meshNameIt++ = decodeless::create::array<const char>(allocator, meshName);
+        *meshNameIt++ = decodeless::create::array<char>(allocator, meshName);
     return result;
 }
 

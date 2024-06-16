@@ -64,6 +64,8 @@ inline MaterialHeader::MaterialHeader()
           .gitHash = readytorender_GIT_HASH,
       } {}
 
+static_assert(decodeless::VersionedSubHeader<MaterialHeader>);
+
 } // namespace common
 
 } // namespace rtr
