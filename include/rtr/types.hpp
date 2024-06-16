@@ -149,8 +149,4 @@ using optional_index = optional_value<T, std::numeric_limits<T>::max()>;
 
 using optional_index32 = optional_index<uint32_t>;
 
-struct external_items {
-    decodeless::offset_span<offset_string> paths;
-};
-
 }; // namespace rtr

@@ -72,13 +72,6 @@ struct MeshLight {
     uint32_t  mesh = std::numeric_limits<uint32_t>::max();
 };
 
-struct ExternalModel {
-    offset_string path;
-    uint32_t      meshesOffset;
-    uint32_t      materialsOffset; // XXX - can't know this if files are edited
-    uint32_t      texturesOffset; // XXX - can't know this if files are edited
-};
-
 struct SceneHeader : decodeless::Header {
     static constexpr decodeless::Magic   HeaderIdentifier{"RTR:COMMON:SCENE"};
     static constexpr decodeless::Version VersionSupported{1, 0, 0};
@@ -91,22 +84,8 @@ struct SceneHeader : decodeless::Header {
     // Root nodes for each scene. There must be at least one.
     decodeless::offset_span<decodeless::offset_ptr<Node>> scenes;
 
-    // Optional external models. A model is a collection of meshes.
-    //
-    // IMPORTANT: either
-    // 1. This array is empty and all meshes are embedded in this file
-    // 2. There are no embedded meshes and each mesh is in its own file
-    //
-    // This rather rigid constraint is chosen to simplify what could otherwise
-    // be an explosion of complexity in indexing.
-    //
-    // No mesh header type is given and it is up to the application to make an
-    // assumption, e.g. whether rtr::common::MeshHeader and
-    // rtr::common::MaterialHeader are expected or another custom format.
-    optional<decodeless::offset_span<ExternalModel>> externalModels;
-
     // Objects attached to nodes. The only thing missing is the mesh, which is
-    // referenced in another header or externalModels.
+    // referenced in another header.
     decodeless::offset_span<Instance>         instances;
     decodeless::offset_span<Camera>           cameras;
     decodeless::offset_span<offset_string>    cameraNames;

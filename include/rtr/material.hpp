@@ -45,16 +45,6 @@ struct MaterialHeader : decodeless::Header {
     decodeless::offset_span<Material>          materials;
     decodeless::offset_span<Texture>           textures;
     decodeless::offset_span<offset_string>     materialNames;
-
-    // Optional external textures. Cast the data in these files to ktx::Header.
-    //
-    // IMPORTANT: either
-    // 1. This array is empty and all textures are embedded in 'textures'
-    // 2. There are no embedded textures and each is in its own ktx file
-    //
-    // This rather rigid constraint is chosen to simplify what could otherwise
-    // be an explosion of complexity in indexing.
-    optional<external_items> texturesExternal;
 };
 
 inline MaterialHeader::MaterialHeader()
